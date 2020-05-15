@@ -1,0 +1,182 @@
+<!DOCTYPE hml>
+<html>
+  <head>
+    <title>Gasland Skid Dice</title>
+    <style>
+      * {
+        border: 0;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #eeeeee;
+      }
+      #contenedor {
+        width: 75%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .superior {
+        width: 75%;
+        height: 12%;
+        background-color: #ddddff;
+      }
+      .intermedia {
+        width: 75%;
+        height: 40%;
+        background-color: #ccccff;
+        text-align: center;
+      }
+      .medio {
+        width: 75%;
+        height: 10%;
+        background-color: #ddddff;
+      }
+      .bajo {
+        width: 75%;
+        height: 5%;
+        background-color: Clear;
+      }
+      #lanzar, #limpiar {
+        text-decoration: none;
+        padding: 1%;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: helvetica;
+        font-weight: 300;
+        font-size: 25px;
+        font-style: italic;
+        color: #006505;
+        background-color: #ccccff;
+        border-radius: 15px;
+        border: 3px double #00ffff;
+      }
+      #Check1, #Check2, #Check3, #Check4, #Check5, #Check6 {
+        width: 27px;
+        height: 27px;
+        margin-top: 15px;
+        margin-left: 10px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="contenedor">
+      <div class="superior" align=center>
+        <p>
+          <td><big>1d:</big><input type="radio" name="dado" id="Check1"></td>
+          <td><big>2d:</big><input type="radio" name="dado" id="Check2"></td>
+          <td><big>3d:</big><input type="radio" name="dado" id="Check3"></td>
+          <td><big>4d:</big><input type="radio" name="dado" id="Check4" checked="checked"></td>
+          <td><big>5d:</big><input type="radio" name="dado" id="Check5"></td>
+          <td><big>6d:</big><input type="radio" name="dado" id="Check6"></td>
+        </p>
+        <p align=center>
+          <button id="lanzar">Lanzar</button>
+        </p>
+        <p>
+          <label id="wait" style="display:none">wait...</label>
+          <progress min="0" max="100" id="barra" style="display:none"></progress>
+        </p>
+        <p id="mymarker"></p>
+      </div>
+      <div class="intermedia">
+        <p class="inter"></p>
+        <p class="inter"></p>
+        <p class="inter"></p>
+        <p class="inter"></p>
+        <p class="inter"></p>
+        <p class="inter"></p>
+      </div>
+      <div class="medio" align=center>
+        <button style="display:none"
+         id="limpiar" onClick=location.reload()>Limpiar</button>
+      </div>
+      <div class="bajo">
+        <label><i>by andO_Obna</label>
+      </div>
+  </section>
+    <script>
+    var checkBox1 = document.getElementById("Check1");
+    var checkBox2 = document.getElementById("Check2");
+    var checkBox3 = document.getElementById("Check3");
+    var checkBox4 = document.getElementById("Check4");
+    var checkBox5 = document.getElementById("Check5");
+    var checkBox6 = document.getElementById("Check6");
+    var button = document.getElementById("lanzar");
+    var bar1 = document.getElementById("wait");
+    var bar2 = document.getElementById("barra");
+    var marker = document.getElementById("mymarker");
+    var clean = document.getElementById("limpiar");
+    var dado = document.getElementsByClassName("inter");
+    var click=0, c=0, d=0, e=0;
+    var m="Shift", n="Slide", o="Spin", p="Hazard";
+
+    console.log(Math.PI);
+
+    button.onclick = function(){
+      click++;
+    	console.log(this.id+": Clicked! "+click);
+      bar1.style.display = "block";
+      bar2.style.display = "block";
+      button.style.display = "none";
+      Ndado();
+      setTimeout(Lanzamiento, 2500);
+      retornarSO()
+    }
+
+    function Lanzamiento(){
+      for (c=0; c<d; c++){
+        e = Math.round(Math.random()*5+1);  // d6 = random * (max - min) + min
+        if (e == 1){
+          console.log(p);
+          dado[c].innerHTML = p;
+          dado[c].style.color = "#CC0000";
+          dado[c].style.textShadow = "5px 2px 4px #00cccc";
+          dado[c].style.fontSize = "200%";
+          dado[c].style.fontFamily = "sans-serif";
+        }
+        else if (e == 2){
+          console.log(o);
+          dado[c].innerHTML = o;
+          dado[c].style.color = "#FFCC33";
+          dado[c].style.textShadow = "5px 2px 4px #0000cc";
+          dado[c].style.fontSize = "200%";
+          dado[c].style.fontFamily = "sans-serif";
+        }
+        else if (e == 3){
+          console.log(n);
+          dado[c].innerHTML = n;
+          dado[c].style.color = "#FFFF33";
+          dado[c].style.textShadow = "5px 2px 4px #0022CC";
+          dado[c].style.fontSize = "200%";
+          dado[c].style.fontFamily = "sans-serif";
+        }
+        else if ((e == 4) || (e == 5) || (e == 6)){
+          console.log(m);
+          dado[c].innerHTML = m;
+          dado[c].style.color = "#00CC00";
+          dado[c].style.textShadow = "5px 2px 4px #11ff11";
+          dado[c].style.fontSize = "200%";
+          dado[c].style.fontFamily = "sans-serif";
+        }
+      }
+      bar1.style.display = "none";
+      bar2.style.display = "none";
+      clean.style.display = "block";
+    }
+
+    function Ndado(){
+      if (checkBox1.checked)      {d=1;}
+      else if (checkBox2.checked) {d=2;}
+      else if (checkBox3.checked) {d=3;}
+      else if (checkBox4.checked) {d=4;}
+      else if (checkBox5.checked) {d=5;}
+      else if (checkBox6.checked) {d=6;}
+    }
+    </script>
+  </body>
+</html>
